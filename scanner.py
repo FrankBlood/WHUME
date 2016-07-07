@@ -47,12 +47,17 @@ class FaceScanner():
 # ============  function test ============
 def test_sliding_window(file_path):
     image = cv2.imread(file_path)
+    sliding_window = SliderWindow()
     winW, winH, stepSizeX, stepSizeY = 60, 60, 40, 50
-    for (x, y, window) in sliding_window(image, stepSizeX=stepSizeX, stepSizeY=stepSizeY, windowSizeW=winW, windowSizeH=winH):
+    for (x, y, window) in sliding_window.run(image, stepSizeX=stepSizeX, stepSizeY=stepSizeY, windowSizeW=winW, windowSizeH=winH):
         if window.shape[0] != winH or window.shape[1] != winW:
             continue
         copy_image = image.copy()
         cv2.rectangle(copy_image, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
         cv2.imshow("Window", copy_image)
-        cv2.waitKey(0)
+        k = cv2.waitKey(0)
+        print k
     cv2.destroyAllWindows()
+
+if __name__ == '__main__':
+    test_sliding_window("./dataset/car/image_0001.jpg")
