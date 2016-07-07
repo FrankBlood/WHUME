@@ -10,11 +10,8 @@ IRWHU-魔眼识图SDK主要由X个代码模块组成，包括：
         * FaceMatcher (**人脸匹配**)
         * BrokenScreenInspector (**碎屏检测**)
     * scanner (**扫描器**)，定义了魔眼识图扫描图像的类对象，支持多种图像区域扫描方式，包括：
-        * SliderWindow，使用滑动窗口遍历图像的每个小区块，窗口之间没有重叠区域。
-        * OverlapSliderWindow，使用滑动窗口遍历图像的每个小区块，窗口之间有部分重叠区域。
-        * SpecialScanner (**特殊扫描器**)
-            * FaceScanner (**人脸定位**)，从图像中定位可能的人脸区域。
-            * TextScanner (**文字定位**)，从图像中定位可能的文字区域。
+        * SliderWindow，使用滑动窗口遍历图像的每个小区块。
+        * FaceScanner (**人脸定位**)，从图像中定位可能的人脸区域。
     * commons (**通用函数库**)，定义了魔眼用到的各种通用函数。
     * preprocess (**预处理**)，包括一系列预处理脚本，包括训练数据生成，模型训练，模型准确率交叉检验等。
 * 3dpart (**第三方模块**):
