@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 """
 scanner.py
 
@@ -16,7 +16,7 @@ face_cascade = cv2.CascadeClassifier('./3dpart/opencv/haarcascade_frontalface_de
 class SliderWindow():
     """使用滑动窗口遍历图像的每个小区块"""
     @staticmethod
-    def run(cv2_image, stepSizeX, stepSizeY, windowSize):
+    def run(cv2_image, stepSizeX, stepSizeY, windowSizeW, windowSizeH):
         """
             cv2_image: opencv mat 图像矩阵
             stepSizeX:
@@ -27,7 +27,7 @@ class SliderWindow():
         for y in xrange(0, cv2_image.shape[0], stepSizeY):
             for x in xrange(0, cv2_image.shape[1], stepSizeX):
                 # yield the current window
-                yield (x, y, cv2_image[y:y + windowSize[1], x:x + windowSize[0]])
+                yield (x, y, cv2_image[y:y + windowSizeH, x:x + windowSizeW])
 
 class FaceScanner():
     """从图像中定位可能的人脸区域"""
@@ -48,7 +48,7 @@ class FaceScanner():
 def test_sliding_window(file_path):
     image = cv2.imread(file_path)
     winW, winH, stepSizeX, stepSizeY = 60, 60, 40, 50
-    for (x, y, window) in sliding_window(image, stepSizeX=stepSizeX, stepSizeY=stepSizeY, windowSize=(winW, winH)):
+    for (x, y, window) in sliding_window(image, stepSizeX=stepSizeX, stepSizeY=stepSizeY, windowSizeW=winW, windowSizeH=winH):
         if window.shape[0] != winH or window.shape[1] != winW:
             continue
         copy_image = image.copy()
