@@ -1,2 +1,2 @@
 # WHUME
-magic eyes
+## 魔眼(magic eyes)
