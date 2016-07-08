@@ -31,6 +31,7 @@ if __name__ == "__main__":
     
     if os.path.isfile(args.I):
         fp = open(args.I, 'r')
+        nf = 0
         for line in fp.readlines():
             img = cv2.imread(line.strip())
             img_name = line[line.rfind("/")+1:].strip()
@@ -38,10 +39,14 @@ if __name__ == "__main__":
             for x, y, block_img in slider_w.run(img, args.SX, args.SY, args.WW, args.WH):
                 w, h, c = np.shape(block_img)
                 if w == args.WW and h == args.WH:
-                    cv2.imwrite(args.O+"/"+str(n)+"-"+img_name, block_img) 
+                    if not os.path.exists(args.O+"/"+str(nf)):
+                        os.mkdir(args.O+"/"+str(nf))
+                    cv2.imwrite(args.O+"/"+str(nf)+"/"+str(n)+"-"+img_name, block_img) 
                     n += 1
+            nf += 1
         fp.close()
     elif os.path.isdir(args.I):
+        nf = 0
         for img_name in os.listdir(args.I):
             if img_name.endswith(".jpg"):
                 img_path = args.I+"/"+img_name
@@ -50,5 +55,8 @@ if __name__ == "__main__":
                 for x, y, block_img in slider_w.run(img, args.SX, args.SY, args.WW, args.WH):
                     w, h, c = np.shape(block_img)
                     if w == args.WW and h == args.WH:
-                        cv2.imwrite(args.O+"/"+str(n)+"-"+img_name, block_img)
+                        if not os.path.exists(args.O+"/"+str(nf)):
+                            os.mkdir(args.O+"/"+str(nf))
+                        cv2.imwrite(args.O+"/"+str(nf)+"/"+str(n)+"-"+img_name, block_img) 
                         n += 1
+                nf += 1

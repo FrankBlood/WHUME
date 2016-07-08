@@ -38,7 +38,7 @@ if __name__ == "__main__":
             img_name = line[line.rfind("/")+1:].strip()
             n = 1
             for x, y, block_img in slider_w.run(img, args.SX, args.SY, args.WW, args.WH):
-                w, h, c = np.shape(block_img)
+                h, w, c = np.shape(block_img)
                 if w == args.WW and h == args.WH:
                     copy_img = img.copy()
                     cv2.rectangle(copy_img, (x, y), (x + args.WW, y + args.WH), (0, 255, 0), 2)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 img = cv2.imread(img_path)
                 n = 1
                 for x, y, block_img in slider_w.run(img, args.SX, args.SY, args.WW, args.WH):
-                    w, h, c = np.shape(block_img)
+                    h, w, c = np.shape(block_img)
                     if w == args.WW and h == args.WH:
                         copy_img = img.copy()
                         cv2.rectangle(copy_img, (x, y), (x + args.WW, y + args.WH), (0, 255, 0), 2)
